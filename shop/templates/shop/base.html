@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>title>{% block title %}Mi tienda online{% endblock %}</title>
+        <link href= "{% static 'css/base.css' %}" rel="stylesheet">
+    </head>
+    <header>
+        <a href="{%url 'feedback:feedback_create' %}" class="button">Póngase en contacto con nosotros</a>
+    </header>
+    <header>
+        <center>
+            <p>Tienda de alimentación deportiva</p>
+        </center>
+        <center>
+            <div id="header">
+            <a href="/" class="logo">RED HOUND</a>
+            <img src="{% static 'img/logo.png' %}" alt="Tienda de alimentación deportiva">
+        </div>
+        </center>
+
+    </header>
+    <body>
+        <div id="subheader">
+            <div class="cart">
+            {% with total_items=cart|length %}
+                {% if total_items > 0 %}
+                    Su carrito de compras:
+                    <a href="{% url 'cart:cart_detail' %}">
+                    {{ total_items }} item{{ total_items|pluralize }},
+                    €{{ cart.get_total_price }}
+                    </a>
+                {% else %}
+                        Su carrito de compras está vacío.
+                    {% endif %}
+                {% endwith %}
+        </div>
+    </div>
+        <div id="content">
+            {% block content %}
+            {%endblock %}
+        </div>
+    </body>
+    <footer>
+        <center>
+             <p>Dirección: Turquía, Bursa, Nilüfer, Tel:+905348592913</p>
+            <p>&copy; Todos los derechos reservados</p>
+        </center>
+    </footer>
+
+</html>
+
+
