@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
+
+
 <html>
     <head>
         <meta charset="utf-8" />
@@ -7,7 +9,18 @@
         <link href= "{% static 'css/base.css' %}" rel="stylesheet">
     </head>
     <header>
-        <a href="{%url 'feedback:feedback_create' %}" class="button">Póngase en contacto con nosotros</a>
+        <p align="right"><a href="{%url 'feedback:feedback_create' %}" class="button">Póngase en contacto con nosotros</a>
+    </header>
+
+    <header>
+
+        {% if user.is_authenticated %}
+            <p align="left">Hola {{ user.username }}!</p>
+            <p><a href="{% url 'logout' %}" class="button">Log out</a></p>
+        {% else %}
+            <p>No ha iniciado la sesión.</p>
+            <a href="{% url 'login' %}" class="button">Log In</a>
+        {% endif %}
     </header>
     <header>
         <center>
@@ -21,6 +34,7 @@
         </center>
 
     </header>
+
     <body>
         <div id="subheader">
             <div class="cart">
@@ -41,7 +55,9 @@
             {% block content %}
             {%endblock %}
         </div>
+
     </body>
+
     <footer>
         <center>
              <p>Dirección: Turquía, Bursa, Nilüfer, Tel:+905348592913</p>
